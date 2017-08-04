@@ -6,7 +6,7 @@ class ApiController < ApplicationController
 
   def authenticated?
 
-    authenticate_or_request_with_http_basic {|email, password| User.where( username: username, password: password).present? }
+    authenticate_or_request_with_http_basic {|email, password| User.where( email: email, password: password).present? }
   end
 
 end
