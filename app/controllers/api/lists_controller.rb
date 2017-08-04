@@ -1,4 +1,4 @@
-class Api::ListsController < ApplicationController
+class Api::ListsController < ApiController
   before_action :authenticated?
 
 
@@ -13,6 +13,7 @@ class Api::ListsController < ApplicationController
   end
 
   def update
+
     list = List.find(params[:id])
     if list.update(list_params)
       render json: list
@@ -23,8 +24,7 @@ class Api::ListsController < ApplicationController
 
   def destroy
     begin
-      user = User.find(params[:user_id])
-      list = user.lists.find(params(:id))
+      list = List.find(params[:id])
       list.destroy
 
       render json: {}, status: :no_content
@@ -32,6 +32,7 @@ class Api::ListsController < ApplicationController
       render :json => {}, :status => :not_found
     end
   end
+
 
   private
 
